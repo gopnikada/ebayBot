@@ -21,6 +21,7 @@ bot.on('message', (msg) => {
     let categories="categories";
     let elektronik = 'elektronik';
     let laptops = 'laptops'
+    let pcs = 'pcs'
     if (msg.text.toString().toLowerCase().indexOf(startShow) === 0) {           
 
         setInterval(() => {
@@ -46,7 +47,13 @@ bot.on('message', (msg) => {
     }
     else if(msg.text.toString().toLowerCase().indexOf(laptops) === 0){
         setInterval(() => {
-            getData(bot, msg)
+            getData(bot, msg, item='s-notebooks', num='/c278')
+        }, 2000);
+        console.log('showwing')
+    }
+    else if(msg.text.toString().toLowerCase().indexOf(pcs) === 0){
+        setInterval(() => {
+            getData(bot, msg, item='s-pcs', num='/c228')
         }, 2000);
         console.log('showwing')
     }

@@ -2,7 +2,7 @@ const axios = require('axios')
 const jsdom = require("jsdom");
 const fs = require('fs')
 
-async function getCats(bot, msg){
+async function getCats(bot, msg, item){
     try {
         let response = await axios.get('https://www.ebay-kleinanzeigen.de')        
         
