@@ -18,8 +18,9 @@ bot.onText(/\/start/, (msg) => {
 });
 bot.on('message', (msg) => {
     var startShow = "show";
-    let categories="categories"
-    let elektronik = 'elektronik'
+    let categories="categories";
+    let elektronik = 'elektronik';
+    let laptops = 'laptops'
     if (msg.text.toString().toLowerCase().indexOf(startShow) === 0) {           
 
         setInterval(() => {
@@ -38,11 +39,19 @@ bot.on('message', (msg) => {
     else if(msg.text.toString().toLowerCase().indexOf(elektronik) === 0){
         bot.sendMessage(msg.chat.id, " choose main category or type yours", {
             "reply_markup":{
-                "keyboard": [['Laptop'],['PCs']]
+                "keyboard": [['laptops'],['PCs']]
             }
         });
         console.log('ok in test')
     }
+    else if(msg.text.toString().toLowerCase().indexOf(laptops) === 0){
+        setInterval(() => {
+            getData(bot, msg)
+        }, 2000);
+        console.log('showwing')
+    }
+ 
+   
     
    
     
