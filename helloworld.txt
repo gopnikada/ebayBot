@@ -1,0 +1,8 @@
+
+                                                        <input class="splitfield-dropdown splitfield-input splitfield-right-input" tabindex="2" id="srch-ctgry-inpt" readonly="readonly" type="text" value="Alle Kategorien ">
+                                                        <input type="hidden" value="" name="categoryId" id="search-category-value">
+                                                        <ul class="dropdown-list multiselectbox-list">
+                                                            <li class="multiselectbox-option"><a class="multiselectbox-link" data-val="0">Alle Kategorien</a>
+                                                            </li>
+                                                        </ul>
+                                                    

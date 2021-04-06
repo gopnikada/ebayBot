@@ -8,7 +8,6 @@ const {getData} = require("./getData");
 process.env['BOT_TOKEN'] = '1746976450:AAFL6EmOS39agaIFTCgK5veuabpXGjt1BWc';
 //const bot = new Telegraf(process.env.BOT_TOKEN)
 console.log(process.env.BOT_TOKEN)
-const {bibFun} = require('./bibFun')
 
 
 
