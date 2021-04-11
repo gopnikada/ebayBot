@@ -1,18 +1,15 @@
-process.env.NTBA_FIX_319 = 1;
-const TelegramBot = require('node-telegram-bot-api');
-const Agent = require('socks5-https-client/lib/Agent');
-const token = '1746976450:AAFmbjrWyBV-A3k1EQhfZ6-OC8TkkNCH-60';
+var fs = require('fs'),
+    request = require('request');
 
-const bot = new TelegramBot(token, {polling:true,request:{
-    agentClass: Agent,
-    agentOptions: {
-        socksHost: 'Your socks Host',
-        socksPort: 'Your socks Port'
-    }
-}});
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
 
-bot.on('message', (msg) => {
-    bot.sendMessage(msg.chat.id, "hello");
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
+download('https://www.google.com/images/srpr/logo3w.png', 'google.png', function(){
+  console.log('done');
 });
-
-bot.on("polling_error", (msg) => console.log(msg));

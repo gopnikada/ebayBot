@@ -12,7 +12,9 @@
     "axios": "^0.21.1",
     "html-dom-parser": "^1.0.0",
     "jsdom": "^16.5.2",
+    "node-fetch": "^2.6.1",
     "node-telegram-bot-api": "^0.52.0",
+    "request": "^2.88.2",
     "socks5-https-client": "^1.2.1",
     "telegraf": "^4.3.0",
     "telegraf-inline-menu": "^6.2.1"
