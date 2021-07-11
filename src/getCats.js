@@ -7,20 +7,18 @@ const catsUrl = 'https://www.ebay-kleinanzeigen.de/s-kategorien.html'
 async function getCats(){
     const responseCats = await axios.get(catsUrl)
     try{
-        const cats=[]
-        const subCats=[]
+        const catsObj = {}
         const dom = new jsdom.JSDOM(responseCats.data);
         const catsNames = [...dom.window.document.getElementsByClassName('treelist-headline')]
         catsNames.forEach((e, i, a)=>{
-
-            cats.push(e.children.item(0).textContent);
-
+            let subs = [];
             [...catsNames[i].parentNode.children.item(1).children].forEach(s=>{
-               console.log(s.children.item(0).textContent)
+               let subCat = s.children.item(0).textContent
+                subs.push(subCat)
             })
-
+            catsObj[e.children.item(0).textContent] = subs
         })
-        console.log("CATS" + cats)
+        return catsObj
 
     }catch (e) {console.log(e)}
 }

@@ -9,13 +9,19 @@ const {getCats} = require("./getCats");
     
 bot.onText(/\/start/, (msg) => {
 
-    getCats()
 
-    bot.sendMessage(msg.chat.id, "Wellcome, choose your category or type search request", {
-        "reply_markup":{
-            "keyboard": [["show", "categories"],   ["Keyboard"], ["I'm robot"]]
-        }
-    });
+    getCats().then(r=> {
+        bot.sendMessage(msg.chat.id, "Wellcome, choose your category or type search request", {
+            "reply_markup":{
+                "keyboard": [['df'],['ds']]
+            }
+
+        });
+        console.log(r)
+    })
+
+
+
 });
 bot.on('message', (msg) => {
     var startShow = "show";
