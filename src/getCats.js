@@ -13,14 +13,14 @@ async function getCats(){
         const catsNames = [...dom.window.document.getElementsByClassName('treelist-headline')]
         catsNames.forEach((e, i, a)=>{
 
+            cats.push(e.children.item(0).textContent);
 
-            //catsNames[i].parentNode.children.item(1).children.item(0).children.item(0).textContent
             [...catsNames[i].parentNode.children.item(1).children].forEach(s=>{
-               console.log(s.textContent)
+               console.log(s.children.item(0).textContent)
             })
 
         })
-        console.log(cats)
+        console.log("CATS" + cats)
 
     }catch (e) {console.log(e)}
 }
