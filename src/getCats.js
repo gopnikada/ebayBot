@@ -1,23 +1,28 @@
-const axios = require('axios')
 const jsdom = require("jsdom");
-const fs = require('fs')
+const axios = require('axios')
 
-async function getCats(bot, msg, item){
-    try {
-        let response = await axios.get('https://www.ebay-kleinanzeigen.de')        
-        
-        let dom = new jsdom.JSDOM(response.data);
-      
-        var list = dom.window.document.getElementsByClassName('splitfield-dropdown splitfield-input splitfield-right-input')[0].click()
-        console.log(list.innerHTML)
-       
-       
-        
-        bot.sendMessage(msg.chat.id, "sent");
 
-    } catch (error) {
-        console.log(error.response.body);
-    }
-    
+const catsUrl = 'https://www.ebay-kleinanzeigen.de/s-kategorien.html'
+
+async function getCats(){
+    const responseCats = await axios.get(catsUrl)
+    try{
+        const cats=[]
+        const subCats=[]
+        const dom = new jsdom.JSDOM(responseCats.data);
+        const catsNames = [...dom.window.document.getElementsByClassName('treelist-headline')]
+        catsNames.forEach((e, i, a)=>{
+
+
+            //catsNames[i].parentNode.children.item(1).children.item(0).children.item(0).textContent
+            [...catsNames[i].parentNode.children.item(1).children].forEach(s=>{
+               console.log(s.textContent)
+            })
+
+        })
+        console.log(cats)
+
+    }catch (e) {console.log(e)}
 }
-module.exports = {getCats}
+
+module.exports={getCats}
