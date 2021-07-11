@@ -1,5 +1,6 @@
 const jsdom = require("jsdom");
 const axios = require('axios')
+const fs = require('fs');
 
 
 const catsUrl = 'https://www.ebay-kleinanzeigen.de/s-kategorien.html'
@@ -18,6 +19,7 @@ async function getCats(){
             })
             catsObj[e.children.item(0).textContent] = subs
         })
+        fs.writeFile('cats.json', JSON.stringify(catsObj), 'utf8', ()=>{console.log('wrote to cats.json')});
         return catsObj
 
     }catch (e) {console.log(e)}
