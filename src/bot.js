@@ -2,6 +2,8 @@ const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs')
 const token = '1746976450:AAEUq5Kjimgp60lX0laGy_iOgo3X5iw06p0';
 const Agent = require('socks5-https-client/lib/Agent')
+const {search} = require("./search");
+const {getUrl} = require("./getUrl");
 const bot = new TelegramBot(token,
     {
         polling:true,
@@ -33,6 +35,7 @@ bot.onText(/\/start/, (msg) => {
     });
 });
 bot.on('message', (msg) => {
+    const values = Object.values(cats).reduce((acc, cur)=>{return acc+cur}).split(',')
       Object.keys(cats).forEach(s=>{
         if(msg.text.indexOf(s) == 0){
             let kbArr = [];
@@ -40,10 +43,7 @@ bot.on('message', (msg) => {
                 let __ = []
                 __.push(s)
                 kbArr.push(__)
-
             });
-            console.log(Object.values(cats))
-
             bot.sendMessage(msg.chat.id, " choose main category or type yours", {
                 "reply_markup":{
                     "keyboard": kbArr
@@ -52,4 +52,24 @@ bot.on('message', (msg) => {
         }
     });
 
+    values.forEach(catTS=>{
+        if(msg.text.indexOf(catTS) == 0){
+                getUrl(catTS).then(r=>
+                    setInterval(() => {
+                        if(typeof r == "undefined"){
+
+                        }else {
+                            getData(bot, msg, r)
+                        }
+                    }, 2000)
+                )
+        }
+    })
+
+});
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+
+    console.log(search('https://www.ebay-kleinanzeigen.de/s-handy-telekom/c173', 'sumsung'))
+    //https://www.ebay-kleinanzeigen.de/s-handy-telekom/samsung/k0c173
 });
